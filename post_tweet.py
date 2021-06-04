@@ -20,7 +20,7 @@ def post_tweet(latest_tweet_posted_time, oldest_tweet_posted_time, twitter):
     # アップロードした画像を添付したツイートを投稿
     message = 'test\n' \
               + 'ツイート収集範囲：\n{}~{}\n'.format(oldest_tweet_posted_time, latest_tweet_posted_time) \
-              + '#lovelive #LoveLiveNow'
+              + '#lovelive #LLNow'
     params = {'status': message, 'media_ids': [media_id]}
     res_post = twitter.post(url_post, params=params)
 
