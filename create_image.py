@@ -3,7 +3,8 @@ import wordcloud
 
 
 def create_image(words):
-    wc = wordcloud.WordCloud(font_path='/System/Library/Fonts/ヒラギノ角ゴシック W6.ttc',
+    font_path = 'fonts/ヒラギノ角ゴシック W6.ttc'
+    wc = wordcloud.WordCloud(font_path=font_path,
                              background_color='white',
                              # mask=msk,
                              # colormap = 'gray',
