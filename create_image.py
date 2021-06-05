@@ -1,13 +1,16 @@
 import matplotlib.pyplot as plt
 import wordcloud
+import random
 
 
 def create_image(words):
     font_path = 'fonts/ヒラギノ角ゴシック W6.ttc'
+    colormap_list = ['viridis', 'plasma', 'inferno', 'magma', 'cividis', 'spring', 'summer', 'autumn', 'winter', 'cool',
+                     'Wistia']
     wc = wordcloud.WordCloud(font_path=font_path,
                              background_color='white',
                              # mask=msk,
-                             # colormap = 'gray',
+                             colormap=random.choice(colormap_list),
                              stopwords={"もの", "これ", "ため", "それ", "ところ", "よう", "こと",
                                         "そう", "ます", "ので", "から", "など", "です", "する", "いる", "ない",
                                         "あり", "なく", "また", "その", "ある", "なっ", "てる", "この", "なり", "あれ",
