@@ -5,8 +5,7 @@ import random
 
 def create_image(words):
     font_path = 'fonts/ヒラギノ角ゴシック W6.ttc'
-    colormap_list = ['viridis', 'plasma', 'inferno', 'magma', 'cividis', 'spring', 'summer', 'autumn', 'winter', 'cool',
-                     'Wistia']
+    colormap_list = ['viridis', 'plasma', 'inferno', 'magma', 'cividis', 'spring', 'summer', 'autumn', 'winter', 'cool']
     wc = wordcloud.WordCloud(font_path=font_path,
                              background_color='white',
                              # mask=msk,
