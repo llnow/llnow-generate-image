@@ -30,7 +30,7 @@ def post_tweet(n_fetched_tweets, latest_tweet_posted_time, oldest_tweet_posted_t
         print("Success.")
     else:
         print("Failed.")
-        print(" - Responce Status Code : {}".format(res_post.status_code))
+        print(" - Response Status Code : {}".format(res_post.status_code))
         print(" - Error Code : {}".format(res_post.json()["errors"][0]["code"]))
         print(" - Error Message : {}".format(res_post.json()["errors"][0]["message"]))
         # {'errors': [{'code': 170, 'message': 'Missing required parameter: status.'}]}
