@@ -1,5 +1,3 @@
-import os
-
 from posted_time_utc2jst import *
 from parse2params import *
 
@@ -63,5 +61,3 @@ def fetch_tweets(twitter):
     # oldest_tweet_created_at = posted_time_utc2jst(oldest_tweet['created_at'])
 
     return tweets, n_fetched_tweets, latest_tweet_created_at, oldest_tweet_created_at
-
-
