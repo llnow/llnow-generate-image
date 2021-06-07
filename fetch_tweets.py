@@ -22,7 +22,9 @@ def fetch_tweets(twitter):
     max_api_request = contents['resources']['search']['/search/tweets']['remaining']
     print('max_api_request: ' + str(max_api_request))
     tweets = []
-    for _ in range(max_api_request):
+    for req in range(max_api_request):
+        if req != 0 and req % 10 == 0:
+            print('{} requested'.format(req))
         res = twitter.get(url_search, params=params)
         contents = res.json()
         fetched_tweets = contents['statuses']
@@ -33,7 +35,6 @@ def fetch_tweets(twitter):
         search_metadata = contents['search_metadata']
         next_results = search_metadata['next_results']
         since_id = search_metadata['since_id']
-        print(next_results)
         next_results = next_results.lstrip('?')  # 先頭の?を削除
         params = parse2params(next_results)
         # 崩れるので上書き
