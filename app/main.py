@@ -5,8 +5,7 @@ from create_image import *
 from post_tweet import *
 from requests_oauthlib import OAuth1Session
 import os
-from dotenv import load_dotenv
-load_dotenv()
+
 
 CONSUMER_KEY = os.environ['CONSUMER_KEY']
 CONSUMER_SECRET = os.environ['CONSUMER_SECRET']
@@ -16,13 +15,10 @@ ACCESS_TOKEN_SECRET = os.environ['ACCESS_TOKEN_SECRET']
 twitter = OAuth1Session(CONSUMER_KEY, CONSUMER_SECRET, ACCESS_TOKEN, ACCESS_TOKEN_SECRET)
 
 
-def main():
+def main(event, context):
     tweets, n_fetched_tweets, latest_tweet_posted_time, oldest_tweet_posted_time = fetch_tweets(twitter)
     texts = extract_texts(tweets)
     words = extract_trend_words(texts)
     create_image(words)
     post_tweet(n_fetched_tweets, latest_tweet_posted_time, oldest_tweet_posted_time, twitter)
 
-
-if __name__ == '__main__':
-    main()
