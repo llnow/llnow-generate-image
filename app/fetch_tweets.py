@@ -6,9 +6,10 @@ BUCKET_NAME = 'll-now'
 
 
 def fetch_tweets(twitter):
-    # s3からsince_id.txtをダウンロード
     s3 = boto3.resource('s3')
     bucket = s3.Bucket(BUCKET_NAME)
+
+    # s3からsince_id.txtをダウンロード
     text_path = '/tmp/since_id.txt'
     bucket.download_file('tmp/since_id.txt', text_path)
 
