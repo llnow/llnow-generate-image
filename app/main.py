@@ -21,4 +21,3 @@ def main(event, context):
     words = extract_trend_words(texts)
     create_image(words)
     post_tweet(n_fetched_tweets, latest_tweet_posted_time, oldest_tweet_posted_time, twitter)
-
