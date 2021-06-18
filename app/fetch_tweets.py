@@ -1,12 +1,19 @@
 from posted_time_utc2jst import *
 from parse2params import *
+import boto3
 
+BUCKET_NAME = 'll-now'
 
 def fetch_tweets(twitter):
+    # s3からsince_id.txtをダウンロード
+    s3 = boto3.resource('s3')
+    bucket = s3.Bucket(BUCKET_NAME)
+    text_path = '/tmp/since_id.txt'
+    bucket.download_file('tmp/since_id.txt', text_path)
+
     # since_idを取得
-    file = open('tmp/since_id.txt', 'r')
-    since_id = file.read()
-    file.close()
+    with open(text_path, 'r') as f:
+        since_id = file.read()
 
     url_search = 'https://api.twitter.com/1.1/search/tweets.json'
     url_limit = 'https://api.twitter.com/1.1/application/rate_limit_status.json'
