@@ -12,7 +12,7 @@ def create_image(words):
 
     # s3からフォントをダウンロード
     font_path = '/tmp/ヒラギノ角ゴシック W6.ttc'
-    bucket.download_file('tmp/since_id.txt', font_path)
+    bucket.download_file('fonts/ヒラギノ角ゴシック W6.ttc', font_path)
 
     colormap_list = ['viridis', 'plasma', 'inferno', 'magma', 'cividis', 'spring', 'summer', 'autumn', 'winter', 'cool', 'ocean', 'gist_earth']
     wc = wordcloud.WordCloud(font_path=font_path,
