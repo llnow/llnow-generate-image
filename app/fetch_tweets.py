@@ -13,7 +13,7 @@ def fetch_tweets(twitter):
 
     # since_idを取得
     with open(text_path, 'r') as f:
-        since_id = file.read()
+        since_id = f.read()
 
     url_search = 'https://api.twitter.com/1.1/search/tweets.json'
     url_limit = 'https://api.twitter.com/1.1/application/rate_limit_status.json'
