@@ -4,6 +4,7 @@ import boto3
 
 BUCKET_NAME = 'll-now'
 
+
 def fetch_tweets(twitter):
     # s3からsince_id.txtをダウンロード
     s3 = boto3.resource('s3')
