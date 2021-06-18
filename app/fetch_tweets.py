@@ -55,11 +55,11 @@ def fetch_tweets(twitter):
     latest_tweet_created_at = posted_time_utc2jst(latest_tweet['created_at'])
     oldest_tweet_created_at = posted_time_utc2jst(oldest_tweet['created_at'])
     n_fetched_tweets = len(tweets)
+
     # since_idを更新
-    file = open('tmp/since_id.txt', 'w')
     updated_since_id = latest_tweet['id_str']
-    file.write(updated_since_id)
-    file.close()
+    obj = s3.Object(BUCKET_NAME, text_path)
+    obj.put(Body=updated_since_id)
 
     # res = twitter.get(url_search, params=params)
     # contents = res.json()
