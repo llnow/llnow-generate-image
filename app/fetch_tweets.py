@@ -2,7 +2,7 @@ from posted_time_utc2jst import *
 from parse2params import *
 import boto3
 
-BUCKET_NAME = 'll-now'
+BUCKET_NAME = 'll-now-material'
 
 
 def fetch_tweets(twitter):

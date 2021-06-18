@@ -3,7 +3,7 @@ import wordcloud
 import random
 import boto3
 
-BUCKET_NAME = 'll-now'
+BUCKET_NAME = 'll-now-material'
 
 
 def create_image(words):
