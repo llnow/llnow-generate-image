@@ -1,10 +1,19 @@
 import matplotlib.pyplot as plt
 import wordcloud
 import random
+import boto3
+
+BUCKET_NAME = 'll-now'
 
 
 def create_image(words):
-    font_path = '../fonts/ヒラギノ角ゴシック W6.ttc'
+    s3 = boto3.resource('s3')
+    bucket = s3.Bucket(BUCKET_NAME)
+
+    # s3からフォントをダウンロード
+    font_path = '/tmp/ヒラギノ角ゴシック W6.ttc'
+    bucket.download_file('tmp/since_id.txt', font_path)
+
     colormap_list = ['viridis', 'plasma', 'inferno', 'magma', 'cividis', 'spring', 'summer', 'autumn', 'winter', 'cool', 'ocean', 'gist_earth']
     wc = wordcloud.WordCloud(font_path=font_path,
                              background_color='white',
