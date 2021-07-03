@@ -6,4 +6,5 @@ def fetch_words(bucket, key):
     with open(file_path, 'r') as f:
         lines = f.readlines()
     words = ' '.join(lines)
+
     return words
