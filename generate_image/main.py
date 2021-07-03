@@ -1,5 +1,6 @@
 from fetch_words import *
 from generate_wc import *
+from put_image import *
 
 
 def main(event, context):
@@ -8,3 +9,4 @@ def main(event, context):
 
     words = fetch_words(bucket, key)
     generate_wc(words, bucket)
+    put_image(bucket)
