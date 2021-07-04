@@ -1,4 +1,9 @@
+import boto3
+
+
 def fetch_words(bucket, key):
+    s3 = boto3.resource('s3')
+    bucket = s3.Bucket(bucket)
     # 単語リストをs3からダウンロード
     file_path = '/tmp/' + key.split('/')[1]
     bucket.download_file(key, file_path)
