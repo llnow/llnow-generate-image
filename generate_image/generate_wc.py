@@ -32,5 +32,5 @@ def generate_wc(words, bucket):
     #
     # time = now.strftime('%Y%m%d-%H%M%S')
 
-    # wc.to_file('tmp/wc_{}.png'.format(time))
-    wc.to_file('tmp/wc.png')
+    # wc.to_file('/tmp/wc_{}.png'.format(time))
+    wc.to_file('/tmp/wc.png')
