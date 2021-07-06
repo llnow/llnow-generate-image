@@ -6,6 +6,7 @@ import random
 def generate_wc(words, bucket):
     s3 = boto3.resource('s3')
     bucket = s3.Bucket(bucket)
+
     # s3からフォントをダウンロード
     font_path = '/tmp/ヒラギノ角ゴシック W6.ttc'
     bucket.download_file('fonts/ヒラギノ角ゴシック W6.ttc', font_path)
