@@ -1,5 +1,4 @@
 import boto3
-import matplotlib.pyplot as plt
 import wordcloud
 import random
 
@@ -23,13 +22,7 @@ def generate_wc(words, bucket):
                              width=1200, height=675)
     wc.generate(' '.join(words))
 
-    plt.figure(figsize=(15, 12))
-    plt.imshow(wc)
-    plt.axis("off")
-    plt.show()
-
     # now = dt.datetime.now()
-    #
     # time = now.strftime('%Y%m%d-%H%M%S')
 
     # wc.to_file('/tmp/wc_{}.png'.format(time))
