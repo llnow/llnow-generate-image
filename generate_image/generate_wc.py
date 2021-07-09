@@ -40,6 +40,6 @@ def generate_wc(words, img_config, bucket):
         width=width,
         height=height
     )
-    wc.generate(' '.join(words))
+    wc.generate(words)
 
     wc.to_file('/tmp/wc.png')
