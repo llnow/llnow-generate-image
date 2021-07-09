@@ -24,22 +24,26 @@ def generate_sub_image(img_config):
     text_right_hash = '#'
     text_right_hashtag_body = 'LLNow'
 
-    # 画像サイズ，マージンを取得
+    # 画像サイズ，マージン，フォントサイズ，背景色を取得
     img_width = img_config['img_width']
     img_height = img_config['sub_img_height']
-    side_margin = img_config['sub_img_side_margin']
-    tweet_range_left_margin = img_config['tweet_range_left_margin']
+    left_margin = img_config['sub_img_left_margin']
+    right_margin = img_config['sub_img_right_margin']
+    sub_img_above_font_size = img_config['sub_img_above_font_size']
+    sub_img_below_font_size = img_config['sub_img_below_font_size']
+    sub_img_right_font_size = int((img_height - 10) / 2)
+    sub_img_bg_color = img_config['sub_img_bg_color']
 
     # 背景画像を作成
-    img = Image.new('RGB', (img_width, img_height), (220, 220, 220))
+    img = Image.new('RGB', (img_width, img_height), sub_img_bg_color)
     # 描画インスタンスを宣言
     draw = ImageDraw.Draw(img)
 
     # フォントを指定
     font_path = '/tmp/ヒラギノ角ゴシック W6.ttc'
-    font_above = ImageFont.truetype(font_path, 60)
-    font_below = ImageFont.truetype(font_path, 100)
-    font_right = ImageFont.truetype(font_path, int((img_height - 10) / 2))
+    font_above = ImageFont.truetype(font_path, sub_img_above_font_size)
+    font_below = ImageFont.truetype(font_path, sub_img_below_font_size)
+    font_right = ImageFont.truetype(font_path, sub_img_right_font_size)
 
     # フォントサイズを取得
     width_above_gen_from = font_above.getsize(text_above_gen_from)[0]
@@ -52,24 +56,24 @@ def generate_sub_image(img_config):
     width_right_hashtag_body = font_right.getsize(text_right_hashtag_body)[0]
 
     # 描画
-    draw.text((side_margin, 0),
+    draw.text((left_margin, 0),
               text_above_gen_from, font=font_above, fill='#333333')
-    draw.text((side_margin + width_above_gen_from, 0),
+    draw.text((left_margin + width_above_gen_from, 0),
               text_above_n_tweet, font=font_above, fill='#000')
-    draw.text((side_margin + width_above_gen_from + width_above_n_tweet, 0),
+    draw.text((left_margin + width_above_gen_from + width_above_n_tweet, 0),
               text_above_twt_w, font=font_above, fill='#333333')
-    draw.text((side_margin + width_above_gen_from + width_above_n_tweet + width_above_twt_w, 0),
+    draw.text((left_margin + width_above_gen_from + width_above_n_tweet + width_above_twt_w, 0),
               text_above_hashtag, font=font_above, fill='#1DA1F2')
-    draw.text((side_margin + width_above_gen_from + width_above_n_tweet + width_above_twt_w + width_above_hashtag, 0),
+    draw.text((left_margin + width_above_gen_from + width_above_n_tweet + width_above_twt_w + width_above_hashtag, 0),
               text_above_in, font=font_above, fill='#333333')
-    draw.text((side_margin + tweet_range_left_margin, 60), text_below, font=font_below, fill='#000')
-    draw.text((img_width - max(width_right_username, width_right_hashtag_body) - width_right_at - side_margin, 0),
+    draw.text((left_margin, sub_img_above_font_size), text_below, font=font_below, fill='#000')
+    draw.text((img_width - max(width_right_username, width_right_hashtag_body) - width_right_at - right_margin, 0),
               text_right_at, font=font_right, fill='#000')
-    draw.text((img_width - max(width_right_username, width_right_hashtag_body) - side_margin, 0),
+    draw.text((img_width - max(width_right_username, width_right_hashtag_body) - right_margin, 0),
               text_right_username, font=font_right, fill='#000')
-    draw.text((img_width - max(width_right_username, width_right_hashtag_body) - width_right_hash - side_margin, (img_height - 10) / 2 + 5),
+    draw.text((img_width - max(width_right_username, width_right_hashtag_body) - width_right_hash - right_margin, sub_img_right_font_size + 5),
               text_right_hash, font=font_right, fill='#1DA1F2')
-    draw.text((img_width - max(width_right_username, width_right_hashtag_body) - side_margin, (img_height - 10) / 2 + 5),
+    draw.text((img_width - max(width_right_username, width_right_hashtag_body) - right_margin, sub_img_right_font_size + 5),
               text_right_hashtag_body, font=font_right, fill='#1DA1F2')
 
     # 画像を保存
