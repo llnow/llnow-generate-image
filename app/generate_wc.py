@@ -1,6 +1,7 @@
 import boto3
-import wordcloud
-import random
+from wordcloud import WordCloud, ImageColorGenerator
+import numpy as np
+from PIL import Image
 
 
 def generate_wc(words, img_config, bucket):
@@ -11,35 +12,33 @@ def generate_wc(words, img_config, bucket):
     font_path = '/tmp/ヒラギノ角ゴシック W6.ttc'
     bucket.download_file('fonts/ヒラギノ角ゴシック W6.ttc', font_path)
 
+    # s3からマスク画像をダウンロード
+    mask_img_path = '/tmp/mask.png'
+    bucket.download_file('mask.png', mask_img_path)
+
     # dynamodbからstopwordsを取得
     table = boto3.resource('dynamodb').Table('ll_now')
     primary_key = {'primary': 'wc_stop_word'}
     res = table.get_item(Key=primary_key)
     basic_word = res['Item']['word']['basic_word']
-    lovelive_basic_word = res['Item']['word']['lovelive_basic_word']
-    stopwords = set(basic_word + lovelive_basic_word)
-
-    # dynamodbからcolormap_listを取得
-    primary_key = {'primary': 'colormap_list'}
-    res = table.get_item(Key=primary_key)
-    colormap_list = res['Item']['colormap']
-
-    # colormapをランダムに決定
-    colormap = random.choice(colormap_list)
+    stopwords = set(basic_word)
 
     # wordcloudのサイズを指定
     width = img_config['img_width']
     height = img_config['wc_height']
 
-    wc = wordcloud.WordCloud(
+    mask_array = np.array(Image.open(mask_img_path))
+    image_color = ImageColorGenerator(mask_array)
+
+    wc = WordCloud(
         font_path=font_path,
         width=width,
         height=height,
-        # mask=msk,
+        mask=mask_array,
+        color_func=image_color,
         stopwords=stopwords,
         background_color='white',
-        colormap=colormap,
-        include_numbers=True
+        collocations=False
     )
     wc.generate(words)
 
