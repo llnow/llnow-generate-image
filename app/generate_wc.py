@@ -39,7 +39,7 @@ def generate_wc(words, img_config, bucket):
         stopwords=stopwords,
         background_color='white',
         colormap=colormap,
-        include_numbers=True
+        include_numbers=False
     )
     wc.generate(words)
 
