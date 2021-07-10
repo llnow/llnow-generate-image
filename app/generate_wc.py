@@ -32,13 +32,13 @@ def generate_wc(words, img_config, bucket):
     height = img_config['wc_height']
 
     wc = wordcloud.WordCloud(
+        font_path=font_path,
         width=width,
         height=height,
-        background_color='white',
-        font_path=font_path,
         # mask=msk,
-        colormap=colormap,
         stopwords=stopwords,
+        background_color='white',
+        colormap=colormap,
         include_numbers=True
     )
     wc.generate(words)
