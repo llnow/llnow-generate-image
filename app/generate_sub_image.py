@@ -20,7 +20,7 @@ def generate_sub_image(img_config):
     text_above_in = ' in'
     text_below = '{}-{} JST'.format(since, until)
     text_right_at = '@'
-    text_right_username = 'LLNow_JP'
+    text_right_username = 'LLNow_jp'
     text_right_hash = '#'
     text_right_hashtag_body = 'LLNow'
 
