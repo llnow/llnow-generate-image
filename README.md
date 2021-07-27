@@ -16,4 +16,4 @@ Twitter BOT [LL Now](https://twitter.com/LLNow_jp) の画像生成部分
 * [ll-now-post-tweet](https://github.com/sy-app/ll-now-post-tweet)
 
 ## License
-[MIT](https://choosealicense.com/licenses/mit/)
+[MIT](https://github.com/sy-app/ll-now-generate-image/blob/master/LICENSE)
