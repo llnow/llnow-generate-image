@@ -1,5 +1,6 @@
 import boto3
 from PIL import Image, ImageDraw, ImageFont
+from get_hashtags import *
 
 
 def generate_sub_image(img_config):
@@ -16,7 +17,7 @@ def generate_sub_image(img_config):
     text_above_gen_from = 'Generated from '
     text_above_n_tweet = str(n_tweet)
     text_above_twt_w = ' Tweets with '
-    text_above_hashtag = '#lovelive'
+    text_above_hashtag = ' '.join(get_hashtags())
     text_above_in = ' in'
     text_below = '{}-{} JST'.format(since, until)
     text_right_at = '@'
