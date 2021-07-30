@@ -8,8 +8,6 @@ def check_datetime_in_range(since_str, until_str):
     until = datetime.strptime(until_str+'+0900', '%Y-%m-%d %H:%M:%S%z')
 
     if since <= now <= until:
-        print('in range')
         return True
     else:
-        print('out of range')
         return False
