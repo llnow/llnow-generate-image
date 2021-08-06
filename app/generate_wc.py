@@ -37,6 +37,7 @@ def generate_wc(words, img_config, bucket):
         height=height,
         # mask=msk,
         stopwords=stopwords,
+        regexp="\w[\w']+|[^ぁ-んァ-ン０-９a-zA-Z0-9\-!#$%&'()\*\+\-\.,\/:;<=>?@\[\\\]^_`{|}~]",
         background_color='white',
         colormap=colormap,
         include_numbers=False
