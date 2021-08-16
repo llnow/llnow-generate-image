@@ -12,14 +12,13 @@ def generate_wc(words, img_config, bucket):
     bucket.download_file('fonts/ヒラギノ角ゴシック W6.ttc', font_path)
 
     # dynamodbからstopwordsを取得
-    table = boto3.resource('dynamodb').Table('ll_now')
-    primary_key = {'primary': 'wc_stop_word'}
-    res = table.get_item(Key=primary_key)
-    basic_word = res['Item']['word']['basic_word']
-    lovelive_basic_word = res['Item']['word']['lovelive_basic_word']
-    stopwords = set(basic_word + lovelive_basic_word)
+    table = boto3.resource('dynamodb').Table('ll-now-wc-stopwords')
+    res = table.scan()
+    stopwords = [item['word'] for item in res['Items']]
+    stopwords = set(stopwords)
 
     # dynamodbからcolormap_listを取得
+    table = boto3.resource('dynamodb').Table('ll_now')
     primary_key = {'primary': 'colormap_list'}
     res = table.get_item(Key=primary_key)
     colormap_list = res['Item']['colormap']
