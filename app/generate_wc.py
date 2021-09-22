@@ -39,8 +39,10 @@ def generate_wc(words, img_config, bucket):
         mask=mask_array,
         color_func=image_color,
         stopwords=stopwords,
+        regexp="\w[\w']+|[^ぁ-んァ-ン０-９a-zA-Z0-9\-!#$%&'()\*\+\-\.,\/:;<=>?@\[\\\]^_`{|}~]",  # 漢字以外の一文字を除去
         background_color='white',
-        collocations=False
+        collocations=True,
+        include_numbers=False
     )
     wc.generate(words)
 
