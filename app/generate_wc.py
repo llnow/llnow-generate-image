@@ -1,4 +1,5 @@
 import boto3
+from boto3.dynamodb.conditions import Attr
 from wordcloud import WordCloud, ImageColorGenerator
 import numpy as np
 from PIL import Image
@@ -17,11 +18,12 @@ def generate_wc(words, img_config, bucket):
     bucket.download_file('mask.png', mask_img_path)
 
     # dynamodbからstopwordsを取得
-    table = boto3.resource('dynamodb').Table('ll_now')
-    primary_key = {'primary': 'wc_stop_word'}
-    res = table.get_item(Key=primary_key)
-    basic_word = res['Item']['word']['basic_word']
-    stopwords = set(basic_word)
+    table = boto3.resource('dynamodb').Table('ll-now-wc-stopwords')
+    option = {
+        'FilterExpression': Attr('category').ne('lovelive_basic')
+    }
+    res = table.scan(**option)
+    stopwords = set([item['word'] for item in res['Items']])
 
     # wordcloudのサイズを指定
     width = img_config['img_width']
