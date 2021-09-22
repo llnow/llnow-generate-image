@@ -23,6 +23,7 @@ def generate_wc(words, img_config, bucket):
         'FilterExpression': Attr('category').ne('lovelive_basic')
     }
     res = table.scan(**option)
+    # res = table.scan()
     stopwords = set([item['word'] for item in res['Items']])
 
     # wordcloudのサイズを指定
