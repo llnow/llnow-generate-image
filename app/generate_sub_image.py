@@ -1,14 +1,18 @@
+import os
 import boto3
+import json
 from PIL import Image, ImageDraw, ImageFont
 from get_hashtags import *
 
+region = os.environ['AWS_DEFAULT_REGION']
+ssm = boto3.client('ssm', region)
 
-def generate_sub_image(img_config):
-    # サブイメージ作成に必要な情報をdynamodbから取得
-    table = boto3.resource('dynamodb').Table('ll_now')
-    primary_key = {'primary': 'tweets_feature'}
-    res = table.get_item(Key=primary_key)
-    tweets_feature = res['Item']['feature']
+
+def generate_sub_image(img_config, mode):
+    # サブイメージ作成に必要な情報をssmパラメータストアから取得
+    key = 'll-now-tweets-features-{}'.format(mode)
+    params = get_ssm_params(key)
+    tweets_feature = json.loads(params[key])
     n_tweet = tweets_feature['n_tweet']
     since = tweets_feature['oldest_tweet_created_at']
     until = tweets_feature['latest_tweet_created_at']
@@ -79,3 +83,14 @@ def generate_sub_image(img_config):
 
     # 画像を保存
     img.save('/tmp/sub_image.png', quality=100, dpi=(600, 600), optimize=True)
+
+
+def get_ssm_params(*keys):
+    response = ssm.get_parameters(
+        Names=keys
+    )
+    params = {}
+    for p in response['Parameters']:
+        params[p['Name']] = p['Value']
+
+    return params
