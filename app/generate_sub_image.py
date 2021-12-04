@@ -23,7 +23,7 @@ def generate_sub_image(img_config, mode):
     text_above_twt_w = ' Tweets with '
     text_above_hashtag = ' '.join(get_hashtags())
     text_above_in = ' in'
-    text_below = '{}-{} JST'.format(since, until)
+    text_below = '{}-{} JST'.format(since.replace('-', '/'), until.replace('-', '/'))
     text_right_at = '@'
     text_right_username = 'LLNow_ jp'  # spaceを入れないと'_'と'j'が被る
     text_right_hash = '#'
