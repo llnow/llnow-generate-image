@@ -21,7 +21,7 @@ def generate_masked_wc(words, bucket, birthday_character):
     # maskを取得
     series = birthday_character['series']
     first_name_en = birthday_character['first_name_en']
-    mask_key = '/mask/LL-icon-mask/{}_icon/{}.png'.format(series, first_name_en)
+    mask_key = 'mask/LL-icon-mask/{}_icon/{}.png'.format(series, first_name_en)
     mask_path = '/tmp/mask.png'
     bucket.download_file(mask_key, mask_path)
     mask_array = np.array(Image.open(mask_path))
