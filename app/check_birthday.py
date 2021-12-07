@@ -1,11 +1,10 @@
-import json
 from boto3.dynamodb.conditions import Attr
 from get_ssm_params import *
 
 
-def check_birthday(mode):
-    # 日付をssmパラメータストアから取得
-    year, month, day = get_date(mode)
+def check_birthday(tweets_features):
+    # ツイート収集期間の最終日の日付を取得
+    year, month, day = get_date(tweets_features)
 
     table = boto3.resource('dynamodb').Table('lovelive-character')
     res = table.scan(
@@ -21,11 +20,8 @@ def check_birthday(mode):
     return flag_birthday, birthday_character
 
 
-def get_date(mode):
-    key = 'll-now-tweets-features-{}'.format(mode)
-    params = get_ssm_params(key)
-    tweets_feature = json.loads(params[key])
-    until = tweets_feature['latest_tweet_created_at']
+def get_date(tweets_features):
+    until = tweets_features['latest_tweet_created_at']
     year, month, day = map(int, until.split()[0].split('-'))
 
     return year, month, day
