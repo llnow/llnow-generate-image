@@ -32,7 +32,7 @@ def generate_masked_wc(words, bucket, birthday_character):
         mask=mask_array,
         color_func=image_color,
         stopwords=stopwords,
-        regexp="[\wΑ-ω]+[\wΑ-ω・’.]*[\wΑ-ω]+|[\wΑ-ω]+",
+        regexp="[\wΑ-ω]+[\wΑ-ω・'’.]*[\wΑ-ω]+|[\wΑ-ω]+",
         background_color='white',
         include_numbers=False
     )
