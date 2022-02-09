@@ -17,11 +17,12 @@ jobs:
           python-version: 3.8
       - run: pip3 install awscli
       - run: |
-          VERSION=$(aws lambda publish-version --function-name ll-now-generate-image-HelloWorldFunction-AwoHFtV5bM8l --query Version | sed -e 's/[^0-9]//g')
+          VERSION=$(aws lambda publish-version --function-name $AWS_LAMBDA_FUNCTION_NAME --query Version | sed -e 's/[^0-9]//g')
           echo Published version $VERSION
-          aws lambda update-alias --function-name ll-now-generate-image-HelloWorldFunction-AwoHFtV5bM8l --name prod --function-version $VERSION
+          aws lambda update-alias --function-name $AWS_LAMBDA_FUNCTION_NAME --name prod --function-version $VERSION
           echo Changed 'prod' alias to point version $VERSION
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ap-northeast-1
+          AWS_LAMBDA_FUNCTION_NAME: ${{ secrets.AWS_LAMBDA_FUNCTION_NAME }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}
