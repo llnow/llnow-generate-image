@@ -39,7 +39,7 @@ def generate_wc(words, img_config, bucket):
         regexp="[\wΑ-ω]+[\wΑ-ω・’.]*[\wΑ-ω]+|[\wΑ-ω]+",
         background_color='white',
         colormap=colormap,
-        include_numbers=False
+        include_numbers=True
     )
     wc.generate(words)
 

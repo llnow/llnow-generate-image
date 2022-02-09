@@ -20,8 +20,9 @@ jobs:
           pip install -r requirements.txt -t ./
           zip -r package.zip ./*
           pip3 install awscli
-          aws lambda update-function-code --function-name ll-now-generate-image-HelloWorldFunction-AwoHFtV5bM8l --zip-file fileb://package.zip
+          aws lambda update-function-code --function-name $AWS_LAMBDA_FUNCTION_NAME --zip-file fileb://package.zip
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_DEFAULT_REGION: ap-northeast-1
+          AWS_LAMBDA_FUNCTION_NAME: ${{ secrets.AWS_LAMBDA_FUNCTION_NAME }}
+          AWS_DEFAULT_REGION: ${{ secrets.AWS_REGION }}

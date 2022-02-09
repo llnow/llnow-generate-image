@@ -34,7 +34,7 @@ def generate_masked_wc(words, bucket, birthday_character):
         stopwords=stopwords,
         regexp="[\wΑ-ω]+[\wΑ-ω・’.]*[\wΑ-ω]+|[\wΑ-ω]+",
         background_color='white',
-        include_numbers=False
+        include_numbers=True
     )
     wc.generate(words)
 
