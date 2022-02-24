@@ -1,5 +1,4 @@
 from boto3.dynamodb.conditions import Attr
-from get_ssm_params import *
 
 
 def check_birthday(tweets_features):
