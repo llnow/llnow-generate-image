@@ -13,15 +13,15 @@ def generate_post_image(words, img_config, bucket):
     flag_special_mask, img_basename = check_special_mask(tweets_features)
 
     if flag_special_mask:
-        generate_masked_wc(words, bucket, mask_type='special', mask_requirements=img_basename)
+        generate_masked_wc(words, mask_type='special', mask_requirements=img_basename)
     elif flag_birthday:
         mask_wc_on_birthday = birthday_character['mask_wc_on_birthday']
         if mask_wc_on_birthday:
-            generate_masked_wc(words, bucket, mask_type='birthday_character', mask_requirements=birthday_character)
+            generate_masked_wc(words, mask_type='birthday_character', mask_requirements=birthday_character)
         else:
-            generate_wc(words, img_config, bucket)
+            generate_wc(words, img_config)
     else:
-        generate_wc(words, img_config, bucket)
+        generate_wc(words, img_config)
 
     generate_sub_image(tweets_features, img_config)
 

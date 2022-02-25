@@ -5,14 +5,16 @@ from wordcloud import WordCloud, ImageColorGenerator
 from PIL import Image
 import numpy as np
 
+NAME_BUCKET_PROD = 'll-now-material'
 
-def generate_masked_wc(words, bucket, mask_type, mask_requirements):
+
+def generate_masked_wc(words, mask_type, mask_requirements):
     s3 = boto3.resource('s3')
-    bucket = s3.Bucket(bucket)
+    bucket_prod = s3.Bucket(NAME_BUCKET_PROD)
 
     # s3からフォントをダウンロード
     font_path = '/tmp/ヒラギノ角ゴシック W6.ttc'
-    bucket.download_file('fonts/ヒラギノ角ゴシック W6.ttc', font_path)
+    bucket_prod.download_file('fonts/ヒラギノ角ゴシック W6.ttc', font_path)
 
     # dynamodbからstopwordsを取得
     table = boto3.resource('dynamodb').Table('ll-now-wc-stopwords')
@@ -25,7 +27,7 @@ def generate_masked_wc(words, bucket, mask_type, mask_requirements):
 
     # maskを取得
     mask_path = '/tmp/mask.png'
-    bucket.download_file(mask_key, mask_path)
+    bucket_prod.download_file(mask_key, mask_path)
     mask_array = np.array(Image.open(mask_path))
     image_color = ImageColorGenerator(mask_array)
 
