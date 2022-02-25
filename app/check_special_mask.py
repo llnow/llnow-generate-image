@@ -1,5 +1,5 @@
 import boto3
-import datetime
+from datetime import datetime
 
 
 def check_special_mask(tweets_features):
