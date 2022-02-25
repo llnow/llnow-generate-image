@@ -2,14 +2,16 @@ import boto3
 import wordcloud
 import random
 
+NAME_BUCKET_PROD = 'll-now-material'
 
-def generate_wc(words, img_config, bucket):
+
+def generate_wc(words, img_config):
     s3 = boto3.resource('s3')
-    bucket = s3.Bucket(bucket)
+    bucket_prod = s3.Bucket(NAME_BUCKET_PROD)
 
     # s3からフォントをダウンロード
     font_path = '/tmp/ヒラギノ角ゴシック W6.ttc'
-    bucket.download_file('fonts/ヒラギノ角ゴシック W6.ttc', font_path)
+    bucket_prod.download_file('fonts/ヒラギノ角ゴシック W6.ttc', font_path)
 
     # dynamodbからstopwordsを取得
     table = boto3.resource('dynamodb').Table('ll-now-wc-stopwords')
