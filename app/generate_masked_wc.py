@@ -1,10 +1,12 @@
+from get_mask_key import *
+
 import boto3
 from wordcloud import WordCloud, ImageColorGenerator
 from PIL import Image
 import numpy as np
 
 
-def generate_masked_wc(words, bucket, birthday_character):
+def generate_masked_wc(words, bucket, mask_type, mask_requirements):
     s3 = boto3.resource('s3')
     bucket = s3.Bucket(bucket)
 
@@ -18,10 +20,10 @@ def generate_masked_wc(words, bucket, birthday_character):
     stopwords = [item['word'] for item in res['Items']]
     stopwords = set(stopwords)
 
+    # maskのkeyを取得
+    mask_key = get_mask_key(mask_type, mask_requirements)
+
     # maskを取得
-    series = birthday_character['series']
-    first_name_en = birthday_character['first_name_en']
-    mask_key = 'mask/LL-icon-mask/{}_icon/{}.png'.format(series, first_name_en)
     mask_path = '/tmp/mask.png'
     bucket.download_file(mask_key, mask_path)
     mask_array = np.array(Image.open(mask_path))
