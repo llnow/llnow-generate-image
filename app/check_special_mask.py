@@ -7,7 +7,7 @@ def check_special_mask(tweets_features):
     search_until = tweets_features['latest_tweet_created_at']
 
     # special_maskの時間を取得
-    table = boto3.resource('dynamodb').Table('special_mask_timetable')
+    table = boto3.resource('dynamodb').Table('special-mask-timetable')
     res = table.scan()
 
     flag_special_mask = False
