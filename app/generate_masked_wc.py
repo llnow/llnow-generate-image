@@ -38,7 +38,8 @@ def generate_masked_wc(words, mask_type, mask_requirements):
         stopwords=stopwords,
         regexp="[\wΑ-ω]+[-\wΑ-ω・’.]*[\wΑ-ω]+|[\wΑ-ω]+",
         background_color='white',
-        include_numbers=True
+        include_numbers=True,
+        prefer_horizontal=1
     )
     wc.generate(words)
 
