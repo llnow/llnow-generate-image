@@ -1,5 +1,6 @@
+from get_date import *
+import boto3
 from boto3.dynamodb.conditions import Attr
-from get_ssm_params import *
 
 
 def check_birthday(tweets_features):
@@ -18,10 +19,3 @@ def check_birthday(tweets_features):
         birthday_character = None
 
     return flag_birthday, birthday_character
-
-
-def get_date(tweets_features):
-    until = tweets_features['latest_tweet_created_at']
-    year, month, day = map(int, until.split()[0].split('-'))
-
-    return year, month, day
