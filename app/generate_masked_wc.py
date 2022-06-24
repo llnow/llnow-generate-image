@@ -36,7 +36,7 @@ def generate_masked_wc(words, mask_type, mask_requirements):
         mask=mask_array,
         color_func=image_color,
         stopwords=stopwords,
-        regexp="[\wΑ-ω]+[-\wΑ-ω・’.]*[\wΑ-ω]+|[\wΑ-ω]+[×]*",
+        regexp="[\wΑ-ω]+[-\wΑ-ω・’.]*[\wΑ-ω]+|[\wΑ-ω]+[×]",
         background_color='white',
         include_numbers=True
     )
